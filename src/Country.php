@@ -1,22 +1,16 @@
-
-
 <?php
 
 require_once __DIR__ . '/db.php';
 
-
-
-
-function getAllCountries() {
-   $stmt = $pdo->query("SELECT * FROM countries ORDER BY name ");
+function getAllCountries($pdo) {
+    $stmt = $pdo->query("SELECT * FROM countries ORDER BY name");
     return $stmt->fetchAll();
 }
 
 
-
-function getCountryById($pdo,$id) {
-    $stmt= $pdo->prepare("SELECT * FROM countries WHERE id = :id");
-    $stmt->execute(['id' => $id]);
+function getCountryById($pdo, $id) {
+    $stmt = $pdo->prepare("SELECT * FROM countries WHERE id = ?");
+    $stmt->execute([$id]);
     return $stmt->fetch();
 }
 
